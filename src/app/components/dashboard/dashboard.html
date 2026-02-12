@@ -1,0 +1,24 @@
+<div class="dashboard-wrapper">
+  <h2>Welcome, {{ userName }}</h2>
+  <button (click)="logout()">Logout</button>
+
+  <hr />
+
+  <p *ngIf="loading">Fetching questions...</p>
+  <p *ngIf="error" style="color: red;">{{ error }}</p>
+
+  <ul *ngIf="!loading && !error">
+    <li *ngFor="let q of questions" style="margin-bottom: 20px; list-style-type: none; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+      <ul style="list-style-type: none; padding: 0;">
+        <li><strong>Question #</strong> {{ q.questionNumber }}</li>
+        <li><strong>Title:</strong> {{ q.title }}</li>
+        <li><strong>Description:</strong> {{ q.description }}</li>
+        <li><strong>Difficulty:</strong> {{ q.difficulty }}</li>
+        <li><strong>Next Revision:</strong> {{ q.nextRevisionDate | date }}</li>
+        <li><strong>Times Solved:</strong> {{ q.solveCount }}</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p *ngIf="!loading && questions.length === 0">No questions available.</p>
+</div>
