@@ -21,7 +21,8 @@ export class AddNewQuestionComponent {
   title: '',
   description: '',
   questionNumber: 0,
-  difficulty: 'EASY'
+  difficulty: 'EASY',
+  link: ''
   };
 
 
