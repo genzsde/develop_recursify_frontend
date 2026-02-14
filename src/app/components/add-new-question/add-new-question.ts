@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { Router } from '@angular/router';
 import { DashboardService } from '../../services/dashboard';
 import { CommonModule } from '@angular/common';
@@ -30,6 +30,7 @@ export class AddNewQuestionComponent {
   errorMessage = '';
 
   constructor(
+    private cdr: ChangeDetectorRef,
     private authService: AuthService,
     private dashboardService: DashboardService,
     private router: Router
@@ -50,15 +51,28 @@ export class AddNewQuestionComponent {
 
     this.dashboardService.addQuestion(this.question).subscribe({
       next: () => {
-        this.successMessage = '✅ Question added successfully';
+          this.successMessage = '✅ Question added successfully';
 
-        setTimeout(() => {
-          this.router.navigate(['/dashboard']);
-        }, 1200);
-      },
-      error: () => {
-        this.errorMessage = '❌ Failed to add question';
-      }
+          this.question = {
+            title: '',
+            description: '',
+            questionNumber: 0,
+            difficulty: 'EASY',
+            link: ''
+          };
+
+          setTimeout(() => {
+            this.router.navigate(['/dashboard']);
+          }, 1200);
+        },
+             error: (err) => {
+
+      this.errorMessage = err?.error?.error || 'Failed to add question. Please try again.';
+      this.cdr.detectChanges();
+      setTimeout(() => {
+            this.errorMessage = '';
+      }, 1200);
+    }
     });
   }
 
