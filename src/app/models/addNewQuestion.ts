@@ -3,4 +3,5 @@ export interface addNewQuestion {
     description: string;
     questionNumber: number;
     difficulty: 'EASY' | 'MEDIUM' | 'HARD';
+    link: string;
 }
