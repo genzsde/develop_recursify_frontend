@@ -17,6 +17,8 @@ export class DashboardComponent implements OnInit {
   questions: Question[] = [];
   loading: boolean = true;
   error: string | null = null;
+  showConfirm = false;
+  deleteId: number | null = null;
 
   constructor(
     private authService: AuthService,
@@ -34,7 +36,7 @@ export class DashboardComponent implements OnInit {
     this.userName = localStorage.getItem('userName') || 'User';
     this.loadQuestions();
   }
-  
+
 
   loadQuestions() {
     this.loading = true;
@@ -43,6 +45,7 @@ export class DashboardComponent implements OnInit {
         this.questions = res;
         this.loading = false;
         this.cdr.detectChanges();
+        console.log(res);
       },
       error: (err) => {
         console.error('Failed to load questions:', err);
@@ -51,6 +54,38 @@ export class DashboardComponent implements OnInit {
       },
     });
   }
+
+
+//deleting the question from the dashboard - direct way
+//   deleteQuestion(id: number) {
+//   this.dashboardService.deleteQuestion(id).subscribe({
+//     next: () => {
+//       this.loadQuestions();  // re-fetch from backend
+//     }
+//   });
+// }
+
+openDeletePopup(id: number) {
+  this.deleteId = id;
+  this.showConfirm = true;
+}
+
+cancelDelete() {
+  this.showConfirm = false;
+  this.deleteId = null;
+}
+
+confirmDelete() {
+  if (this.deleteId === null) return;
+
+  this.dashboardService.deleteQuestion(this.deleteId).subscribe({
+    next: () => {
+      this.loadQuestions();
+      this.showConfirm = false;
+      this.deleteId = null;
+    }
+  });
+}
 
   logout() {
     this.authService.logout();

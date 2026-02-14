@@ -19,6 +19,7 @@ export class DashboardService {
         Authorization: `Bearer ${this.authService.getToken()}`,
       },
     });
+
   }
 
   addQuestion(question: addNewQuestion): Observable<addNewQuestion> {
@@ -28,4 +29,14 @@ export class DashboardService {
       },
     });
   }
+
+  deleteQuestion(questionId: number): Observable<string> {
+    return this.http.delete<string>(`${this.baseUrl}/${questionId}`, {
+      headers: {
+        Authorization: `Bearer ${this.authService.getToken()}`,
+      },
+      responseType: 'text' as 'json'
+    });
+  }
+
 }
