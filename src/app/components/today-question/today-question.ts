@@ -1,28 +1,29 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { DashboardService } from '../../services/dashboard';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth';
+import { TodayQuestionService } from '../../services/today-question-service';
 import { Question } from '../../models/question';
-import { DashboardService } from '../../services/dashboard';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
+  selector: 'app-today-question',
+  standalone: true, 
   imports: [CommonModule],
-  templateUrl: './dashboard.html',
-  styleUrls: ['./dashboard.scss'],
+  templateUrl: './today-question.html',
+  styleUrl: './today-question.scss',
 })
-export class DashboardComponent implements OnInit {
+export class TodayQuestionComponent {
   userName: string | null = '';
   questions: Question[] = [];
   loading: boolean = true;
   error: string | null = null;
 
-  constructor(
+  constructor( 
+    private todayQuestionService: TodayQuestionService,
     private authService: AuthService,
-    private router: Router,
     private cdr: ChangeDetectorRef,
-    private dashboardService: DashboardService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -34,11 +35,10 @@ export class DashboardComponent implements OnInit {
     this.userName = localStorage.getItem('userName') || 'User';
     this.loadQuestions();
   }
-  
 
   loadQuestions() {
     this.loading = true;
-    this.dashboardService.allQuestions().subscribe({
+    this.todayQuestionService.getTodayQuestion().subscribe({
       next: (res: Question[]) => {
         this.questions = res;
         this.loading = false;
@@ -51,18 +51,20 @@ export class DashboardComponent implements OnInit {
       },
     });
   }
-
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+  
+  markQuestionAsSolved(questionId: number) {
+    this.todayQuestionService.makeTodayQuestion(questionId).subscribe({
+      next: () => {
+        this.loadQuestions();
+      },
+      error: (err) => {
+        this.error = 'Failed to mark question as solved:';
+        this.loading = false;
+      },
+    });
   }
 
-  goToAddQuestion() {
-  this.router.navigate(['/add-question']);
-  }
-
-  goToTodayQuestion() {
-    this.router.navigate(['/today-question']);
+  goBack() {  this.router.navigate(['/dashboard']);
   }
 
 }
