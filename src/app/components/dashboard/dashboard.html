@@ -19,9 +19,23 @@
         <li><strong>Difficulty:</strong> {{ q.difficulty }}</li>
         <li><strong>Next Revision:</strong> {{ q.nextRevisionDate | date }}</li>
         <li><strong>Times Solved:</strong> {{ q.solveCount }}</li>
+        <li><button (click)="openDeletePopup(q.id)">🗑 Delete</button></li>
       </ul>
     </li>
   </ul>
 
   <p *ngIf="!loading && questions.length === 0">No questions available.</p>
+</div>
+
+
+
+<!-- MODAL -->
+<div class="confirm-modal" *ngIf="showConfirm">
+  <h3>Delete Question</h3>
+  <p>Are you sure you want to delete this question?</p>
+
+  <div class="modal-actions">
+    <button class="yes-btn" (click)="confirmDelete()">Yes</button>
+    <button class="no-btn" (click)="cancelDelete()">No</button>
+  </div>
 </div>
