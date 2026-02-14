@@ -19,7 +19,13 @@
         <li><strong>Difficulty:</strong> {{ q.difficulty }}</li>
         <li><strong>Next Revision:</strong> {{ q.nextRevisionDate | date }}</li>
         <li><strong>Times Solved:</strong> {{ q.solveCount }}</li>
-        <li><strong>Link:</strong> <a href="{{ q.link }}" target="_blank">View Question</a></li>
+        <li>
+  <strong>Link:</strong>
+  <a [href]="q.link" target="_blank" rel="noopener noreferrer">
+    View Question
+  </a>
+</li>
+
       </ul>
     </li>
   </ul>
