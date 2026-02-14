@@ -1,0 +1,83 @@
+.todayQuestion-wrapper {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    h2 { margin: 0; color: #2d3748; }
+
+    button {
+      background-color: #e53e3e;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      &:hover { background-color: #c53030; }
+    }
+  }
+
+  hr { border: 0; border-top: 1px solid #e2e8f0; margin: 1.5rem 0; }
+
+  // The Main List
+  .question-container {
+    padding: 0;
+    list-style: none;
+
+    .question-item {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      transition: transform 0.1s;
+
+      &:hover { border-color: #cbd5e0; }
+
+      // The inner details list
+      .details-list {
+        list-style: none;
+        padding: 0;
+
+        li {
+          margin-bottom: 0.5rem;
+          display: flex;
+          gap: 10px;
+          line-height: 1.5;
+
+          strong {
+            min-width: 130px;
+            color: #4a5568;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Difficulty Styling (Optional extra polish)
+.difficulty-tag {
+  font-weight: bold;
+  &.EASY { color: #38a169; }
+  &.MEDIUM { color: #d69e2e; }
+  &.HARD { color: #e53e3e; }
+}
+
+.status-msg {
+  text-align: center;
+  padding: 2rem;
+  color: #718096;
+}

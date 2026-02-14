@@ -8,24 +8,28 @@ import { addNewQuestion } from '../models/addNewQuestion';
 @Injectable({
   providedIn: 'root',
 })
-export class DashboardService {
+export class TodayQuestionService {
   private baseUrl = 'http://localhost:8080/questions';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  allQuestions(): Observable<Question[]> {
-    return this.http.get<Question[]>(this.baseUrl, {
+  getTodayQuestion(): Observable<Question[]> {
+    return this.http.get<Question[]>(`${this.baseUrl}/today`, {
       headers: {
         Authorization: `Bearer ${this.authService.getToken()}`,
       },
     });
   }
 
-  addQuestion(question: addNewQuestion): Observable<addNewQuestion> {
-    return this.http.post<addNewQuestion>(this.baseUrl, question, {
-      headers: {
-        Authorization: `Bearer ${this.authService.getToken()}`,
-      },
-    });
+  makeTodayQuestion(questionId: number): Observable<addNewQuestion> {
+    return this.http.post<addNewQuestion>(
+      `${this.baseUrl}/${questionId}/solve`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${this.authService.getToken()}`,
+        },
+      }
+    );
   }
 }

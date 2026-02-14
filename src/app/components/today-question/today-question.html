@@ -1,8 +1,6 @@
-<div class="dashboard-wrapper">
-  <h2>Welcome, {{ userName }}</h2>
-  <button (click)="logout()">Logout</button>
-  <button (click)="goToAddQuestion()">➕ Add Question</button>
-  <button (click)="goToTodayQuestion()">Today's Question</button>
+<div class="todayQuestion-wrapper">
+<h2>{{ userName }}'s Today Question</h2>
+<button type="button" (click)="goBack()">Go Back</button>
 
 
   <hr />
@@ -20,8 +18,12 @@
         <li><strong>Next Revision:</strong> {{ q.nextRevisionDate | date }}</li>
         <li><strong>Times Solved:</strong> {{ q.solveCount }}</li>
       </ul>
+      <button (click)="markQuestionAsSolved(q.id)">
+            Mark Solved
+          </button>
     </li>
   </ul>
 
   <p *ngIf="!loading && questions.length === 0">No questions available.</p>
-</div>
+
+  </div>

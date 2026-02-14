@@ -1,0 +1,28 @@
+<div class="container">
+  <h2>{{ userName }}, Add New Question</h2>
+  <button type="button" (click)="goBack()">Go Back</button>
+
+  <form (ngSubmit)="submit()" #form="ngForm">
+
+    <label>Title</label>
+    <input type="text" name="title" [(ngModel)]="question.title" required />
+
+    <label>Description</label>
+    <textarea name="description" [(ngModel)]="question.description" required></textarea>
+
+    <label>Question Number</label>
+    <input type="number" name="questionNumber" [(ngModel)]="question.questionNumber" required />
+
+    <label>Difficulty</label>
+    <select name="difficulty" [(ngModel)]="question.difficulty">
+      <option value="EASY">EASY</option>
+      <option value="MEDIUM">MEDIUM</option>
+      <option value="HARD">HARD</option>
+    </select>
+
+    <button type="submit">Add Question</button>
+  </form>
+
+  <p *ngIf="successMessage" style="color:green">{{ successMessage }}</p>
+  <p *ngIf="errorMessage" style="color:red">{{ errorMessage }}</p>
+</div>
