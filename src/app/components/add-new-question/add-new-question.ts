@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { addNewQuestion } from '../../models/addNewQuestion';
 import { AuthService } from '../../services/auth';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-new-question',
@@ -16,6 +17,11 @@ import { AuthService } from '../../services/auth';
 export class AddNewQuestionComponent {
 
   userName: string | null = '';
+
+  //for updating question
+  editMode: boolean = false;
+  editId: number | null = null;
+
 
   question: addNewQuestion = {
   title: '',
@@ -33,16 +39,29 @@ export class AddNewQuestionComponent {
     private cdr: ChangeDetectorRef,
     private authService: AuthService,
     private dashboardService: DashboardService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+
   ) {}
 
   ngOnInit(): void {
+
+
+
     if (!this.authService.isLoggedIn()) {
       this.router.navigate(['/login']);
       return;
     }
 
     this.userName = localStorage.getItem('userName') || 'User';
+
+    this.route.queryParams.subscribe(params => {
+      if (params['id']) {
+        this.editMode = true;
+        this.editId = Number(params['id']);
+        this.loadQuestion(this.editId);
+    }});
+
   }
 
   submit() {
@@ -74,6 +93,25 @@ export class AddNewQuestionComponent {
       }, 1200);
     }
     });
+  }
+
+  loadQuestion(editId: number)
+  {
+    if(this.editMode && this.editId !== null)
+    {
+      this.dashboardService.getQuestionById(this.editId).subscribe({
+        next: (res) => {
+          this.question = {
+            title: res.title,
+            description: res.description,
+            questionNumber: res.questionNumber,
+            difficulty: res.difficulty as 'EASY' | 'MEDIUM' | 'HARD',
+            link: res.link
+          };
+          this.editMode=false;
+        }
+      })
+    }
   }
 
   goBack() {

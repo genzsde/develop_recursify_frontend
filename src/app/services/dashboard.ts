@@ -22,6 +22,14 @@ export class DashboardService {
 
   }
 
+  getQuestionById(id:number): Observable<Question> {
+  return this.http.get<Question>(`${this.baseUrl}/${id}`, {
+    headers: {
+      Authorization: `Bearer ${this.authService.getToken()}`,
+    },
+  })
+}
+
   addQuestion(question: addNewQuestion): Observable<addNewQuestion> {
     return this.http.post<addNewQuestion>(this.baseUrl, question, {
       headers: {

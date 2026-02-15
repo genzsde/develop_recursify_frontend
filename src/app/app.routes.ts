@@ -6,7 +6,7 @@ import { AddNewQuestionComponent } from './components/add-new-question/add-new-q
 import { TodayQuestionComponent } from './components/today-question/today-question';
 
 export const routes: Routes = [
-    {path: '', redirectTo: 'home', pathMatch: 'full'},
+    {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     { path: 'login', component:  LoginComponent},
     { path: 'register', component: RegisterComponent },
     { path: 'dashboard', component: DashboardComponent },
