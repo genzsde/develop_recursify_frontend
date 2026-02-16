@@ -14,22 +14,13 @@ export class TodayQuestionService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getTodayQuestion(): Observable<Question[]> {
-    return this.http.get<Question[]>(`${this.baseUrl}/today`, {
-      headers: {
-        Authorization: `Bearer ${this.authService.getToken()}`,
-      },
-    });
+    return this.http.get<Question[]>(`${this.baseUrl}/today`);
   }
 
   makeTodayQuestion(questionId: number): Observable<addNewQuestion> {
     return this.http.post<addNewQuestion>(
       `${this.baseUrl}/${questionId}/solve`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${this.authService.getToken()}`,
-        },
-      }
+      {}
     );
   }
 }
