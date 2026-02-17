@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth';
 import { Question } from '../../models/question';
 import { DashboardService } from '../../services/dashboard';
 
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -28,6 +29,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
     if (!this.authService.isLoggedIn()) {
       this.router.navigate(['/login']);
       return;
@@ -35,6 +37,9 @@ export class DashboardComponent implements OnInit {
 
     this.userName = localStorage.getItem('userName') || 'User';
     this.loadQuestions();
+
+
+
   }
 
 
@@ -86,6 +91,8 @@ confirmDelete() {
     }
   });
 }
+
+
 
   logout() {
     this.authService.logout();

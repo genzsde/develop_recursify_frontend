@@ -7,7 +7,7 @@ import { TodayQuestionComponent } from './components/today-question/today-questi
 import { AuthGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
-    {path: '', redirectTo: 'home', pathMatch: 'full'},
+    {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     { path: 'login', component:  LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
