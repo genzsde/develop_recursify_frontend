@@ -55,12 +55,12 @@ export class AddNewQuestionComponent {
 
     this.userName = localStorage.getItem('userName') || 'User';
 
-    this.route.queryParams.subscribe(params => {
-      if (params['id']) {
-        this.editMode = true;
-        this.editId = Number(params['id']);
-        this.loadQuestion(this.editId);
-    }});
+    // this.route.queryParams.subscribe(params => {
+    //   if (params['id']) {
+    //     this.editMode = true;
+    //     this.editId = Number(params['id']);
+    //     this.loadQuestion(this.editId);
+    // }});
 
   }
 
@@ -95,24 +95,24 @@ export class AddNewQuestionComponent {
     });
   }
 
-  loadQuestion(editId: number)
-  {
-    if(this.editMode && this.editId !== null)
-    {
-      this.dashboardService.getQuestionById(this.editId).subscribe({
-        next: (res) => {
-          this.question = {
-            title: res.title,
-            description: res.description,
-            questionNumber: res.questionNumber,
-            difficulty: res.difficulty as 'EASY' | 'MEDIUM' | 'HARD',
-            link: res.link
-          };
-          this.editMode=false;
-        }
-      })
-    }
-  }
+  // loadQuestion(editId: number)
+  // {
+  //   if(this.editMode && this.editId !== null)
+  //   {
+  //     this.dashboardService.getQuestionById(this.editId).subscribe({
+  //       next: (res) => {
+  //         this.question = {
+  //           title: res.title,
+  //           description: res.description,
+  //           questionNumber: res.questionNumber,
+  //           difficulty: res.difficulty as 'EASY' | 'MEDIUM' | 'HARD',
+  //           link: res.link
+  //         };
+  //         this.editMode=false;
+  //       }
+  //     })
+  //   }
+  // }
 
   goBack() {
     this.router.navigate(['/dashboard']);

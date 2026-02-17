@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth';
 import { Question } from '../../models/question';
 import { DashboardService } from '../../services/dashboard';
-import { Chart } from 'chart.js/auto';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -29,8 +29,6 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-
 
     if (!this.authService.isLoggedIn()) {
       this.router.navigate(['/login']);
@@ -94,10 +92,6 @@ confirmDelete() {
   });
 }
 
-  updateQuestion(id: number) {
-    // Implement update logic here, e.g., navigate to an update form
-    this.router.navigate(['add-question'], { queryParams: { id } });
-  }
 
 
   logout() {
