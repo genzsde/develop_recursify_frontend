@@ -13,12 +13,11 @@
     <nav class="nav-links">
       <a routerLink="/features">Features</a>
       <a routerLink="/dashboard">Dashboard</a>
-      <a routerLink="/testimonials">Testimonials</a>
     </nav>
 
     <div class="actions">
-      <button class="btn-text">Sign In</button>
-      <button class="btn-primary">Get Started</button>
+      <button class="btn-text" (click)="navigateToLogin()">Sign In</button>
+      <button class="btn-primary" (click)="navigateToRegister()">Get Started</button>
     </div>
   </div>
 </header>
@@ -45,8 +44,7 @@
     </p>
 
     <div class="hero-actions">
-      <button class="btn-primary">Get Started for Free →</button>
-      <button class="btn-secondary">View Demo</button>
+      <button class="btn-primary" (click)="navigateToRegister()">Get Started for Free</button>
     </div>
 
   </div>
