@@ -4,12 +4,13 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth';
 import { Question } from '../../models/question';
 import { DashboardService } from '../../services/dashboard';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.scss'],
 })
@@ -20,6 +21,9 @@ export class DashboardComponent implements OnInit {
   error: string | null = null;
   showConfirm = false;
   deleteId: number | null = null;
+  selectedQuestion: Question | null = null;
+  showDetails = false;
+  notes: string = '';
 
   constructor(
     private authService: AuthService,
@@ -58,6 +62,26 @@ export class DashboardComponent implements OnInit {
       },
     });
   }
+
+    //opening the card function
+    openDetails(q: Question) {
+  this.selectedQuestion = q;
+  this.showDetails = true;
+
+  // load saved notes (local storage per question)
+  this.notes = localStorage.getItem('notes_' + q.id) || '';
+}
+
+//closing the card function
+closeDetails() {
+  this.showDetails = false;
+  this.selectedQuestion = null;
+}
+
+saveNotes() {
+  if (!this.selectedQuestion) return;
+  localStorage.setItem('notes_' + this.selectedQuestion.id, this.notes);
+}
 
 
 //deleting the question from the dashboard - direct way
