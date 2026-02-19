@@ -42,7 +42,6 @@ export class DashboardComponent implements OnInit {
 
   }
 
-
   loadQuestions() {
     this.loading = true;
     this.dashboardService.allQuestions().subscribe({
@@ -99,9 +98,9 @@ confirmDelete() {
     this.router.navigate(['/login']);
   }
 
-  goToAddQuestion() {
-  this.router.navigate(['/add-question']);
-  }
+  // goToAddQuestion() {
+  // this.router.navigate(['/add-question']);
+  // }
 
   goToTodayQuestion() {
     this.router.navigate(['/today-question']);
