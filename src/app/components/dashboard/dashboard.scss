@@ -46,6 +46,14 @@
   h2 span { color: var(--primary); }
 }
 
+// .progress-chart {
+//   width: 180px;
+//   height: 180px;
+//   background: rgb(131, 23, 23);
+//   border-radius: 20px;
+//   padding: 10px;
+// }
+
 .content-grid {
   .bento-grid {
     display: grid;
@@ -186,21 +194,29 @@
   }
 
   .example-block {
-    background: #0f172a;
-    color: #e2e8f0;
-    padding: 1rem;
-    border-radius: 12px;
-    overflow-x: auto;
-    margin-bottom: 1rem;
+   background: #0f172a;
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 12px;
+
+      // fixed vertical size (scroll after this)
+
+  overflow-x: hidden;     // no horizontal scroll
+
+  white-space: pre-wrap;  // ⭐ wrap text but keep line breaks
+  word-break: break-word; // break very long words
+  line-height: 1.6;
   }
 
   textarea {
-    width: 100%;
+    background-color: #0f172a;
+    width: 95%;
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 0.75rem;
     resize: vertical;
     font-family: monospace;
+    color: #e2e8f0;
   }
 
   .details-actions {

@@ -4,6 +4,12 @@
       <h2>Welcome back, <span>{{ userName }}</span></h2>
       <p class="subtitle">You have {{ questions.length }} questions tracked.</p>
     </div>
+    <!-- pie chart -->
+     <!-- <div class="progress-chart">
+      <canvas #difficultyChart></canvas>
+
+    </div> -->
+
     <div class="header-actions">
 
       <!-- <button class="btn-primary" (click)="goToAddQuestion()">➕ Add Question</button>
@@ -92,10 +98,10 @@
 
     <div class="details-body">
 
-      <h4>Description</h4>
-      <p class="full-desc">{{ selectedQuestion?.description }}</p>
+      <!-- <h4>Description</h4>
+      <p class="full-desc">{{ selectedQuestion?.description }}</p> -->
 
-      <h4>Examples</h4>
+      <h4>Description</h4>
       <pre class="example-block">{{ selectedQuestion?.description }}</pre>
 
       <div class="meta">

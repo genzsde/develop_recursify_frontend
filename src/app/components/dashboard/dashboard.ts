@@ -5,7 +5,9 @@ import { AuthService } from '../../services/auth';
 import { Question } from '../../models/question';
 import { DashboardService } from '../../services/dashboard';
 import { FormsModule } from '@angular/forms';
-
+// import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
+// Chart.register(ArcElement, Tooltip, Legend);
+// import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,6 +27,9 @@ export class DashboardComponent implements OnInit {
   showDetails = false;
   notes: string = '';
 
+  // @ViewChild('difficultyChart') chartRef!: ElementRef<HTMLCanvasElement>;
+  // private chart: Chart | null = null;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -41,10 +46,50 @@ export class DashboardComponent implements OnInit {
 
     this.userName = localStorage.getItem('userName') || 'User';
     this.loadQuestions();
-
-
-
   }
+
+
+//   createDifficultyChart() {
+
+//   if (!this.chartRef) return;
+
+//   let easy = 0, medium = 0, hard = 0;
+
+//   this.questions.forEach(q => {
+//     const diff = q.difficulty?.toLowerCase();
+//     if (diff === 'easy') easy++;
+//     else if (diff === 'medium') medium++;
+//     else if (diff === 'hard') hard++;
+//   });
+
+//   // destroy old chart when reloading questions
+//   if (this.chart) {
+//     this.chart.destroy();
+//   }
+
+//   this.chart = new Chart(this.chartRef.nativeElement, {
+//     type: 'pie',
+//     data: {
+//       labels: ['Easy', 'Medium', 'Hard'],
+//       datasets: [{
+//         data: [easy, medium, hard],
+//         backgroundColor: ['#22c55e', '#f59e0b', '#ef4444'],
+//         borderWidth: 0
+//       }]
+//     },
+//     options: {
+//       responsive: true,
+//       maintainAspectRatio: false,
+//       plugins: {
+//         legend: {
+//           position: 'bottom'
+//         }
+//       }
+//     }
+//   });
+// }
+
+
 
   loadQuestions() {
     this.loading = true;
@@ -62,6 +107,8 @@ export class DashboardComponent implements OnInit {
       },
     });
   }
+
+
 
     //opening the card function
     openDetails(q: Question) {
