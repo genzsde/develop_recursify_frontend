@@ -5,9 +5,15 @@
       <p class="subtitle">You have {{ questions.length }} questions tracked.</p>
     </div>
     <div class="header-actions">
-      <button class="btn-primary" (click)="goToAddQuestion()">➕ Add Question</button>
+
+      <!-- <button class="btn-primary" (click)="goToAddQuestion()">➕ Add Question</button>
+       -->
+      <div style="margin: 10px;">
       <button class="btn-secondary" (click)="goToTodayQuestion()">📅 Today's Question</button>
+      </div>
+      <div style="margin-left: 10px;">
       <button class="btn-logout" (click)="logout()">Logout</button>
+      </div>
     </div>
   </header>
 
