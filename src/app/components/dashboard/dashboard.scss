@@ -194,15 +194,13 @@
   }
 
   .example-block {
-   background: #0f172a;
+  background: #0f172a;
   color: #e2e8f0;
   padding: 1rem;
   border-radius: 12px;
 
       // fixed vertical size (scroll after this)
-
   overflow-x: hidden;     // no horizontal scroll
-
   white-space: pre-wrap;  // ⭐ wrap text but keep line breaks
   word-break: break-word; // break very long words
   line-height: 1.6;
