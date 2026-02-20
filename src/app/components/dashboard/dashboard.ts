@@ -142,7 +142,6 @@ export class DashboardComponent implements OnInit {
 clearFilters(){
   this.searchText = '';
   this.difficultyFilter = '';
-
   this.filteredQuestions = this.questions;
 }
 
@@ -202,7 +201,7 @@ confirmDelete() {
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
   }
 
   // goToAddQuestion() {
