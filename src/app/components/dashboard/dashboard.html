@@ -23,6 +23,36 @@
     </div>
   </header>
 
+  <section class="bento-card filter-bar">
+
+  <div class="search-box">
+    <input type="text"
+           placeholder="Search question..."
+           [(ngModel)]="searchText"
+           (input)="applyFilters()" />
+  </div>
+
+  <div class="filters">
+
+    <select [(ngModel)]="difficultyFilter" (change)="applyFilters()">
+      <option value="">All Difficulty</option>
+      <option value="Easy">Easy</option>
+      <option value="Medium">Medium</option>
+      <option value="Hard">Hard</option>
+    </select>
+
+    <!-- <select [(ngModel)]="statusFilter" (change)="applyFilters()">
+      <option value="">All Status</option>
+      <option value="solved">Solved</option>
+      <option value="unsolved">Unsolved</option>
+      <option value="due">Due Today</option>
+    </select> -->
+
+    <button class="clear-btn" (click)="clearFilters()">Reset</button>
+
+  </div>
+</section>
+
   <main class="content-grid">
     <div class="status-box" *ngIf="loading">
       <span class="loader"></span> Fetching questions...
@@ -31,7 +61,7 @@
 
     <div class="bento-grid" *ngIf="!loading && !error">
       <section class="bento-card question-card"
-               *ngFor="let q of questions;
+               *ngFor="let q of filteredQuestions;
                let i = index"
                (click)="openDetails(q)">
 

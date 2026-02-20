@@ -26,6 +26,10 @@ export class DashboardComponent implements OnInit {
   selectedQuestion: Question | null = null;
   showDetails = false;
   notes: string = '';
+  filteredQuestions: Question[] = [];
+  searchText: string = '';
+  difficultyFilter: string = '';
+
 
   // @ViewChild('difficultyChart') chartRef!: ElementRef<HTMLCanvasElement>;
   // private chart: Chart | null = null;
@@ -96,6 +100,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.allQuestions().subscribe({
       next: (res: Question[]) => {
         this.questions = res;
+        this.filteredQuestions = res;
         this.loading = false;
         this.cdr.detectChanges();
         console.log(res);
@@ -109,6 +114,37 @@ export class DashboardComponent implements OnInit {
   }
 
 
+  applyFilters() {
+
+  const today = new Date().toISOString().split('T')[0];
+
+  this.filteredQuestions = this.questions.filter(q => {
+
+    // search
+    const matchesSearch =
+      !this.searchText ||
+      q.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
+      q.description.toLowerCase().includes(this.searchText.toLowerCase()) ||
+      String(q.questionNumber).includes(this.searchText);
+
+    // difficulty
+    const matchesDifficulty =
+      !this.difficultyFilter ||
+      q.difficulty.toLowerCase() === this.difficultyFilter.toLowerCase();
+
+    // status
+
+
+    return matchesSearch && matchesDifficulty ;
+  });
+}
+
+clearFilters(){
+  this.searchText = '';
+  this.difficultyFilter = '';
+
+  this.filteredQuestions = this.questions;
+}
 
     //opening the card function
     openDetails(q: Question) {
